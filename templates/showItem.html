@@ -5,6 +5,15 @@
     <body>
         <h1>Catalog App</h1>
 
-        <h4>Show Item</h4>
+        <h4>Item</h4>
+
+        <p>Item Name: </p>
+        <p>{{ item.name }}</p>
+
+        <p>Item Description: </p>
+        <p>{{ item.description }}</p></br></br>
+
+        <a href="{{ url_for('editItem', category_id=category_id, item_id=item_id) }}">Edit</a></br></br>
+        <a href="{{ url_for('showCategory', category_id=category_id) }}">Back</a>
     </body>
 </html>

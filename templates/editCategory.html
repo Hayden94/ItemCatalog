@@ -5,6 +5,22 @@
     <body>
         <h1>Catalog App</h1>
 
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <h3>{{ message }}</h3>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
         <h4>Edit Category</h4>
+
+        <form method='POST' action="{{ url_for('editCategory', category_id=category_id) }}">
+            <input type='text' size='30' name='name' placeholder='{{ category.name }}'></br>
+
+            <input type='submit' value='Edit'>
+        </form>
+
+        <a href="{{ url_for('showMain') }}">Back</a>
     </body>
 </html>

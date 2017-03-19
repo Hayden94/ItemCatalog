@@ -5,8 +5,25 @@
     <body>
         <h1>Catalog App</h1>
 
-        <h3>Categories</h3>
+        <a href="{{ url_for('newCategory') }}">Create new category</a>
 
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <h3>{{ message }}</h3>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+        <h3>Categories</h3>
+        {% for category in categories %}
+
+            <a href="{{ url_for('showCategory', category_id=category.id) }}">{{ category.name }}</a></br>
+            <a href="{{ url_for('editCategory', category_id=category.id) }}">Edit</a>
+            -
+            <a href="{{ url_for('deleteCategory', category_id=category.id) }}">Delete</a></br></br>
+
+        {% endfor %}
         <h4>Latest Items</h4>
     </body>
 </html>
