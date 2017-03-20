@@ -1,9 +1,13 @@
 <html>
     <head>
-
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
-        <h1>Catalog App</h1>
+        <a href="/" class='titlelink'>
+            <h1 class="title">Catalog App</h1>
+        </a>
+
+        </br>
 
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
@@ -13,16 +17,25 @@
                 {% endif %}
             {% endwith %}
 
-        <h4>New Category</h4>
+        </br>
 
-        <form method='POST' action="{{ url_for('newCategory') }}">
-            <p>Category Name: </p>
+        <div class="content">
+            <h2 class="subtitle">New Category</h2>
 
-            <input type='text' size='30' name='name'></br>
+            <form method='POST' action="{{ url_for('newCategory') }}">
+                <p class="inputtext">Category Name: </p>
 
-            <input type='submit' value='Create'>
-        </form>
+                <input type='text' size='30' name='name'></br></br>
 
-        <a href="{{ url_for('showMain') }}">Back</a>
+                <input type='submit' value='Create'>
+            </form>
+
+            </br>
+
+        </div>
+
+        <a href="{{ url_for('showMain') }}" class="link">
+            <p>Back</p>
+        </a>
     </body>
 </html>

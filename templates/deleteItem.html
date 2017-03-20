@@ -1,18 +1,28 @@
 <html>
     <head>
-
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
-        <h1>Catalog App</h1>
+        <a href="/" class='titlelink'>
+            <h1 class="title">Catalog App</h1>
+        </a>
 
-        <h4>Delete Item</h4>
+        </br></br>
 
-        <form method='POST' action="{{ url_for('deleteItem', category_id=category_id, item_id=item_id) }}">
-            <p>Are you sure you want to delete {{ item.name }}?</p>
+        <div class="content">
+            <h2 class="subtitle">Delete Item</h2>
 
-            <input type='submit' value='Delete'>
-        </form>
+            <form method='POST' action="{{ url_for('deleteItem', category_id=category_id, item_id=item_id) }}">
+                <p>Are you sure you want to delete {{ item.name }}?</p>
 
-        <a href="{{ url_for('showCategory', category_id=category_id) }}">Back</a>
+                <input type='submit' value='Delete'>
+            </form>
+
+            </br>
+        </div>
+
+        <a href="{{ url_for('showCategory', category_id=category_id) }}" class="link">
+            <p>Back</p>
+        </a>
     </body>
 </html>

@@ -1,19 +1,36 @@
 <html>
     <head>
-
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
-        <h1>Catalog App</h1>
+        <a href="/" class='titlelink'>
+            <h1 class="title">Catalog App</h1>
+        </a>
 
-        <h4>Item</h4>
+        </br></br>
 
-        <p>Item Name: </p>
-        <p>{{ item.name }}</p>
+        <div class="content">
 
-        <p>Item Description: </p>
-        <p>{{ item.description }}</p></br></br>
+            <h2 class="subtitle">Item Name: </h2>
+            <hr>
+            <p>{{ item.name }}</p>
 
-        <a href="{{ url_for('editItem', category_id=category_id, item_id=item_id) }}">Edit</a></br></br>
-        <a href="{{ url_for('showCategory', category_id=category_id) }}">Back</a>
+            <h2 class="subtitle">Item Description: </h2>
+            <hr>
+            <p>{{ item.description }}</p></br>
+
+            <div class='crud'>
+                <a href="{{ url_for('editItem', category_id=category_id, item_id=item_id) }}">
+                    Edit
+                </a>
+            </div>
+
+            </br>
+
+        </div>
+
+        <a href="{{ url_for('showCategory', category_id=category_id) }}" class="link">
+            <p>Back</p>
+        </a>
     </body>
 </html>

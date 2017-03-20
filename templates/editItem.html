@@ -1,9 +1,13 @@
 <html>
     <head>
-
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
-        <h1>Catalog App</h1>
+        <a href="/" class='titlelink'>
+            <h1 class="title">Catalog App</h1>
+        </a>
+
+        </br>
 
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
@@ -13,18 +17,29 @@
                 {% endif %}
             {% endwith %}
 
-        <h4>Edit Item</h4>
+        </br>
 
-        <form method='POST' action="{{ url_for('editItem', category_id=category_id, item_id=item_id) }}">
-            <p>Item Name:</p>
-            <input type='text' size='30' name='name' placeholder='{{ item.name }}'></br>
+        <div class="content">
+            <h2 class="subtitle">Edit Item</h2>
 
-            <p>Item Description: </p>
-            <textarea cols='32' rows='5' name='description' placeholder='{{ item.description }}'></textarea></br>
+            <form method='POST' action="{{ url_for('editItem', category_id=category_id, item_id=item_id) }}">
+                <p class="inputtext">Item Name:</p>
+                <input type='text' size='30' name='name' placeholder='{{ item.name }}'></br>
 
-            <input type='submit' value='Edit'>
-        </form>
+                <p class="inputtext">Item Description: </p>
+                <textarea cols='32' rows='5' name='description' placeholder='{{ item.description }}'></textarea>
 
-        <a href="{{ url_for('showCategory', category_id=category_id) }}">Back</a>
+                </br></br>
+
+                <input type='submit' value='Edit'>
+            </form>
+
+            </br>
+
+        </div>
+
+        <a href="{{ url_for('showCategory', category_id=category_id) }}" class="link">
+            <p>Back</p>
+        </a>
     </body>
 </html>
