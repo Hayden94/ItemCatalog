@@ -3,18 +3,63 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
+        </br>
+
         <a href="/" class='titlelink'>
             <h1 class="title">Catalog App</h1>
         </a>
 
-        </br></br>
+        <a href="/" class="link">
+            <p>Home</p>
+        </a>
 
         <div class="content">
             <h2 class="subtitle">Login</h2>
+
+            <hr>
+
+            <div id="signInButton">
+                <span class="g-signin"
+                data-scope="openid email"
+                data-clientid="752020348254-ius3fua2146io8th9qm2u3nitb4sf34k.apps.googleusercontent.com"
+                data-redirecturi="postmessage"
+                data-accesstype="offline"
+                data-cookiepolicy="single_host_origin"
+                data-callback="signInCallback"
+                data-approvalprompt="force">
+                </span>
+            </div>
+            <div id="result"></div>
         </div>
 
-        <a href="/" class="link">
-            <p>Back</p>
-        </a>
+        <script>
+            function signInCallback(authResult) {
+              if (authResult['code']) {
+                // Hide the sign-in button now that the user is authorized
+                $('#signInButton').attr('style', 'display: none');
+                // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
+                $.ajax({
+                  type: 'POST',
+                  url: '/gconnect?state={{state}}',
+                  processData: false,
+                  data: authResult['code'],
+                  contentType: 'application/octet-stream; charset=utf-8',
+                  success: function(result) {
+                    // Handle or verify the server response if necessary.
+                    if (result) {
+                      $('#result').html(result)
+                     setTimeout(function() {
+                      window.location.href = "/restaurant";
+                     }, 4000);
+
+                    } else if (authResult['error']) {
+                        console.log('There was an error: ' + authResult['error']);
+                    } else {
+                        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+                     }
+                  }
+
+              }); } }
+        </script>
     </body>
 </html>

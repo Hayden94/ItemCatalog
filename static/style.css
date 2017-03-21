@@ -1,6 +1,5 @@
 body {
     background-color: #e6e6e6;
-    margin-top: 10px;
 }
 
 .title {
@@ -32,6 +31,12 @@ body {
     text-align: center;
 }
 
+.login p {
+    text-align: center;
+    position: relative;
+    right: 250px;
+}
+
 form {
     text-align: center;
     margin: 0 auto;
@@ -41,7 +46,7 @@ form {
 .inputtext {
     text-align: center;
     font-weight: bold;
-    color: #006bb3;
+    color: #0095ff;
     font-size: 20px;
 }
 
@@ -61,8 +66,12 @@ form {
     text-align: left;
     text-decoration: none;
     font-weight: bold;
-    color: #006bb3;
+    color: #0095ff;
     font-size: 20px;
+}
+
+.blue:hover {
+    color: #006bb3;
 }
 
 .category p {

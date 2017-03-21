@@ -3,6 +3,10 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
+        <a href="/login" class="login">
+            <p>Login</p>
+        </a>
+
         <a href="/" class='titlelink'>
             <h1 class="title">Catalog App</h1>
         </a>
@@ -18,12 +22,6 @@
             <h2 class="subtitle">Item Description: </h2>
             <hr>
             <p>{{ item.description }}</p></br>
-
-            <div class='crud'>
-                <a href="{{ url_for('editItem', category_id=category_id, item_id=item_id) }}">
-                    Edit
-                </a>
-            </div>
 
             </br>
 
