@@ -4,8 +4,8 @@ app = Flask(__name__)
 from flask import session as login_session
 import random, string
 
-# from oauth2client.client import flow_from_clientsecrets
-# from oauth2client.client import FlowExchangeError
+from oauth2client.client import flow_from_clientsecrets
+from oauth2client.client import FlowExchangeError
 import httplib2
 import json
 from flask import make_response
@@ -13,7 +13,7 @@ import requests
 
 CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
-APPLICATION_NAME = "Restaurant Menu App"
+APPLICATION_NAME = "Catalog App"
 
 # import CRUD operations
 from db_setup import Base, Category, Item, User
@@ -30,7 +30,7 @@ session = DBSession()
 @app.route('/categories/JSON')
 def categoriesJSON():
     categories = session.query(Category).all()
-    return jsonify(Category=[c.serialize for c in categories])
+    return jsonify(Categories=[c.serialize for c in categories])
 
 @app.route('/categories/<int:category_id>/JSON')
 def itemsJSON(category_id):
@@ -41,7 +41,9 @@ def itemsJSON(category_id):
 # Authentication/authorization routes
 @app.route('/login')
 def showLogin():
-    return render_template('login.html')
+    state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
+    login_session['state']=state
+    return render_template('login.html', state=state)
 
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
@@ -49,6 +51,7 @@ def gconnect():
     if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter.'), 401)
         response.headers['Content-Type'] = 'application/json'
+        print "Invalid state parameter."
         return response
     # Obtain authorization code
     code = request.data
@@ -73,7 +76,7 @@ def gconnect():
     result = json.loads(h.request(url, 'GET')[1])
 
     # If there was an error in the access token info, abort.
-    if result.get('error') in not None:
+    if result.get('error') is not None:
         response = make_response(json.dumps(result.get('error')), 500)
         response.headers['Content-Type'] = 'application/json'
         print "error"
@@ -106,6 +109,7 @@ def gconnect():
         return response
 
     # Store the access token in the session for later use.
+    login_session['provider'] = 'google'
     loggin_session['credentials'] = credentials
     loggin_session['gplus_id'] = gplus_id
 
@@ -119,6 +123,12 @@ def gconnect():
     loggin_session['username'] = data['name']
     login_session['picture'] = data['picture']
     login_session['email'] = data['email']
+
+    # see if User exists, if not make a new one
+    user_id = getUserID(login_session['email'])
+    if not user_id:
+        user_id = createUser(login_session)
+    login_session['user_id'] = user_id
 
     output = ''
     output += "<div style='text-align: center; position: relative; margin: 0 auto; display: block;'>"
@@ -136,8 +146,8 @@ def gconnect():
 # User helper models
 def createUser(login_session):
     newUser = User(
-                        name = login_session['username'],
-                        email = login_session['email'],
+                        name=login_session['username'],
+                        email=login_session['email'],
                         picture=login_session['picture']
                         )
     session.add(newUser)
@@ -222,9 +232,10 @@ def newCategory():
 @app.route('/categories/<int:category_id>/')
 def showCategory(category_id):
     category = session.query(Category).filter_by(id=category_id).one()
+    creator = getUserInfo(category.user_id)
     items = session.query(Item).filter_by(category_id=category_id).all()
 
-    return render_template('showCategory.html', category=category, items=items)
+    return render_template('showCategory.html', category=category, items=items, creator=creator)
 
 @app.route('/categories/<int:category_id>/edit', methods=['GET', 'POST'])
 def editCategory(category_id):
@@ -260,8 +271,9 @@ def deleteCategory(category_id):
 @app.route('/categories/<int:category_id>/<int:item_id>/')
 def showItem(category_id, item_id):
     item = session.query(Item).filter_by(id=item_id).one()
+    creator = getUserInfo(item.user_id)
 
-    return render_template('showItem.html', category_id=category_id, item_id=item_id, item=item)
+    return render_template('showItem.html', category_id=category_id, item_id=item_id, item=item, creator=creator)
 
 @app.route('/categories/<int:category_id>/new', methods=['GET', 'POST'])
 def newItem(category_id):

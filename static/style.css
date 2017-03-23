@@ -1,13 +1,13 @@
 body {
-    background-color: #e6e6e6;
+    background-color: #FFD900;
 }
 
 .title {
     font-size: 50px;
     text-align: center;
-    color: #004d00;
+    color: #E20025;
     text-shadow: -1px 1px 2px gray;
-    background-color: #99d6ff;
+    background-color: #e6e6e6;
     position: relative;
     display: block;
     margin: 0 auto;
@@ -24,7 +24,7 @@ body {
 
 .subtitle {
     text-align: center;
-    color: #008000;
+    color: #00558B;
 }
 
 .link p {
@@ -62,16 +62,29 @@ form {
     box-shadow: -2px 2px 5px black;
 }
 
+.creator {
+    text-align: center;
+}
+
+.creator img {
+    display: block;
+    position: relative;
+    width: 35%;
+    margin: 0 auto;
+    padding-top: 10px;
+    border-radius: 25%;
+}
+
 .blue {
     text-align: left;
     text-decoration: none;
     font-weight: bold;
-    color: #0095ff;
+    color: #1aa3ff;
     font-size: 20px;
 }
 
 .blue:hover {
-    color: #006bb3;
+    color: #00558B;
 }
 
 .category p {

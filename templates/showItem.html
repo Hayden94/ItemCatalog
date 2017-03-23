@@ -25,6 +25,10 @@
 
             </br>
 
+            <div class='creator'>
+                <img src="{{ creator.picture }}"><p>Item Created by - </br><strong>{{ creator.name }}</strong></p>
+            </div>
+
         </div>
 
         <a href="{{ url_for('showCategory', category_id=category_id) }}" class="link">

@@ -25,24 +25,27 @@
 
         <div class="content">
 
+            <h2 class='subtitle'>{{ category.name }}</h2>
 
-        <h2 class='subtitle'>{{ category.name }}</h2>
+            <hr>
 
-        <hr>
+            {% for item in items %}
+                <a href="{{ url_for('showItem', category_id=category.id, item_id=item.id) }}" class="blue">
+                    <p>{{ item.name }}</p>
+                </a>
 
-        {% for item in items %}
-            <a href="{{ url_for('showItem', category_id=category.id, item_id=item.id) }}" class="blue">
-                <p>{{ item.name }}</p>
-            </a>
+                </br>
 
-            </br>
+                <div class='crud'>
+                    <a href="{{ url_for('editItem', category_id=category.id, item_id=item.id) }}">Edit</a>
+                    -
+                    <a href="{{ url_for('deleteItem', category_id=category.id, item_id=item.id) }}">Delete</a></br>
+                </div></br>
+            {% endfor %}
 
-            <div class='crud'>
-                <a href="{{ url_for('editItem', category_id=category.id, item_id=item.id) }}">Edit</a>
-                -
-                <a href="{{ url_for('deleteItem', category_id=category.id, item_id=item.id) }}">Delete</a></br>
-            </div></br>
-        {% endfor %}
+            <div class='creator'>
+                <img src="{{ creator.picture }}"><p>Category Created by - </br><strong>{{ creator.name }}</strong></p>
+            </div>
 
         </div>
 
