@@ -1,5 +1,6 @@
 body {
     background-color: #FFD900;
+    font-family: 'Oswald', sans-serif;
 }
 
 .title {
@@ -12,10 +13,18 @@ body {
     display: block;
     margin: 0 auto;
     width: 300px;
-    padding: 7px 0px 7px 0px;
+    padding: 0px 10px 7px 10px;
     border: 1px solid black;
     border-radius: 2px;
     box-shadow: -2px 2px 5px black;
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+#signInButton {
+    text-align: center;
+    position: relative;
+    display: block;
+    margin: 0 auto;
 }
 
 .titlelink {
@@ -35,6 +44,12 @@ body {
     text-align: center;
     position: relative;
     right: 250px;
+}
+
+.welcome {
+    text-align: center;
+    position: relative;
+    margin-top: -8px;
 }
 
 form {
@@ -93,7 +108,7 @@ form {
 
 .crud {
     text-align: right;
-    margin-top: -25px;
+    margin-top: -68px;
 }
 
 .flash {

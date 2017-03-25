@@ -1,22 +1,12 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    </head>
-    <body>
-        </br>
+{% extends "main.html" %}
 
-        <a href="/" class='titlelink'>
-            <h1 class="title">Catalog App</h1>
-        </a>
-
-        <a href="/" class="link">
-            <p>Home</p>
-        </a>
-
+{% block content %}
         <div class="content">
             <h2 class="subtitle">Login</h2>
 
             <hr>
+
+            </br>
 
             <div id="signInButton">
                 <span class="g-signin"
@@ -30,6 +20,13 @@
                 </span>
             </div>
             <div id="result"></div>
+
+        </br>
+
+        <a href="/" class="link">
+            <p>Home</p>
+        </a>
+
         </div>
 
         <script>
@@ -37,6 +34,8 @@
               if (authResult['code']) {
                 // Hide the sign-in button now that the user is authorized
                 $('#signInButton').attr('style', 'display: none');
+                $('.link').attr('style', 'display: none');
+                $('.login').attr('style', 'display: none');
                 // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
                 $.ajax({
                   type: 'POST',
@@ -47,19 +46,21 @@
                   success: function(result) {
                     // Handle or verify the server response if necessary.
                     if (result) {
-                      $('#result').html(result)
-                     setTimeout(function() {
-                      window.location.href = "/restaurant";
-                     }, 4000);
+                        $('#result').html(result)
+                         setTimeout(function() {
+                          window.location.href = "/";
+                         }, 4000);
 
-                    } else if (authResult['error']) {
-                        console.log('There was an error: ' + authResult['error']);
-                    } else {
-                        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
-                     }
+                        } else if (authResult['error']) {
+                            console.log('There was an error: ' + authResult['error']);
+                        } else {
+                            $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+                         }
+                  },
+                  error: function(err) {
+                    console.log(err);
                   }
 
               }); } }
         </script>
-    </body>
-</html>
+{% endblock %}

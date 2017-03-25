@@ -1,28 +1,6 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    </head>
-    <body>
-        <a href="/login" class="login">
-            <p>Login</p>
-        </a>
+{% extends "main.html" %}
 
-        <a href="/" class='titlelink'>
-            <h1 class="title">Catalog App</h1>
-        </a>
-
-        </br>
-
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <h3>{{ message }}</h3>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-
-        </br>
-
+{% block content %}
         <div class="content">
             <h2 class="subtitle">New Category</h2>
 
@@ -41,5 +19,4 @@
         <a href="{{ url_for('showMain') }}" class="link">
             <p>Back</p>
         </a>
-    </body>
-</html>
+{% endblock %}

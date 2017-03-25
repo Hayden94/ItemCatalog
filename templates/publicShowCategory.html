@@ -2,10 +2,6 @@
 
 {% block content %}
         <div class="content">
-            <a href="{{ url_for('newItem', category_id=category.id) }}" class='link'>
-                <p>New item</p>
-            </a>
-
             <h2 class='subtitle'>{{ category.name }}</h2>
 
             <hr>
@@ -16,12 +12,6 @@
                 </a>
 
                 </br>
-
-                <div class='crud'>
-                    <a href="{{ url_for('editItem', category_id=category.id, item_id=item.id) }}">Edit</a>
-                    -
-                    <a href="{{ url_for('deleteItem', category_id=category.id, item_id=item.id) }}">Delete</a></br>
-                </div></br>
             {% endfor %}
 
             <div class='creator'>

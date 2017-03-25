@@ -1,18 +1,6 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    </head>
-    <body>
-        <a href="/login" class="login">
-            <p>Login</p>
-        </a>
+{% extends "main.html" %}
 
-        <a href="/" class='titlelink'>
-            <h1 class="title">Catalog App</h1>
-        </a>
-
-        </br></br>
-
+{% block content %}
         <div class="content">
 
             <h2 class="subtitle">Item Name: </h2>
@@ -21,12 +9,16 @@
 
             <h2 class="subtitle">Item Description: </h2>
             <hr>
-            <p>{{ item.description }}</p></br>
+            <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {{ item.description }}
+            </p>
+            </br>
 
             </br>
 
             <div class='creator'>
-                <img src="{{ creator.picture }}"><p>Item Created by - </br><strong>{{ creator.name }}</strong></p>
+                <img src="{{ creator.picture }}"><p>Item created by - </br><strong>{{ creator.name }}</strong></p>
             </div>
 
         </div>
@@ -34,5 +26,4 @@
         <a href="{{ url_for('showCategory', category_id=category_id) }}" class="link">
             <p>Back</p>
         </a>
-    </body>
-</html>
+{% endblock %}

@@ -1,32 +1,19 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    </head>
-    <body>
-        <a href="/login" class="login">
-            <p>Login</p>
-        </a>
+{% extends "main.html" %}
 
-        <a href="/" class='titlelink'>
-            <h1 class="title">Catalog App</h1>
-        </a>
+{% block content %}
+<div class="content">
+    <h2 class="subtitle">Delete Category</h2>
 
-        </br></br>
+    <form method='POST' action="{{ url_for('deleteCategory', category_id=category_id) }}">
+        <p>Are you sure you want to delete {{ category.name }}?</p>
 
-        <div class="content">
-            <h2 class="subtitle">Delete Category</h2>
+        <input type='submit' value='Delete'>
+    </form>
 
-            <form method='POST' action="{{ url_for('deleteCategory', category_id=category_id) }}">
-                <p>Are you sure you want to delete {{ category.name }}?</p>
+    </br>
+</div>
 
-                <input type='submit' value='Delete'>
-            </form>
-
-            </br>
-        </div>
-
-        <a href="{{ url_for('showMain') }}" class="link">
-            <p>Back</p>
-        </a>
-    </body>
-</html>
+<a href="{{ url_for('showMain') }}" class="link">
+    <p>Back</p>
+</a>
+{% endblock %}

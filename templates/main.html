@@ -1,11 +1,21 @@
 <html>
     <head>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+        <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+
+        <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Oswald" rel="stylesheet">
     </head>
     <body>
+        {% if login_session['username'] %}
+        <a href="/logout" class="login">
+            <p>Logout</p>
+        </a>
+        {% else %}
         <a href="/login" class="login">
             <p>Login</p>
         </a>
+        {% endif %}
 
         <a href="/" class='titlelink'>
             <h1 class="title">Catalog App</h1>
@@ -19,33 +29,20 @@
                 {% endif %}
             {% endwith %}
 
-        <a href="{{ url_for('newCategory') }}" class="link">
-            <p>Create new category</p>
-        </a>
+            </br>
 
-        <div class="content">
-            <h2 class="subtitle">Latest Items</h2>
+            {% if login_session['username'] %}
+                <p class="welcome">
+                    Welcome - {{ login_session['username'] }}
+                </p>
+            {% endif %}
 
-            <hr>
+            {% block content %}
+            {% endblock %}
 
-            <h2 class="subtitle">Categories</h2>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 
-            <hr>
-                {% for category in categories %}
+            <script src="http://apis.google.com/js/client:platform.js?onload=start" async defer></script>
 
-                    <a href="{{ url_for('showCategory', category_id=category.id) }}" class="blue">
-                        <p>{{ category.name }}</p>
-                    </a>
-
-                    </br>
-
-                    <div class="crud">
-                        <a href="{{ url_for('editCategory', category_id=category.id) }}">Edit</a>
-                        -
-                        <a href="{{ url_for('deleteCategory', category_id=category.id) }}">Delete</a></br></br>
-                    </div>
-
-                {% endfor %}
-        </div>
     </body>
 </html>

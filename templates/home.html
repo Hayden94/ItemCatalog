@@ -1,0 +1,38 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="content">
+    <h2 class="subtitle">Latest Items</h2>
+
+    <hr>
+
+        {% for item in latest %}
+            <a href="{{ url_for('showItem', category_id=item.category_id, item_id=item.id) }}" class="blue">
+                <p>{{ item.name }}</p>
+            </a>
+        {% endfor %}
+
+    <a href="{{ url_for('newCategory') }}" class="link">
+        <p>New category</p>
+    </a>
+
+    <h2 class="subtitle">Categories</h2>
+
+    <hr>
+        {% for category in categories %}
+
+            <a href="{{ url_for('showCategory', category_id=category.id) }}" class="blue">
+                <p>{{ category.name }}</p>
+            </a>
+
+            </br>
+
+            <div class="crud">
+                <a href="{{ url_for('editCategory', category_id=category.id) }}">Edit</a>
+                -
+                <a href="{{ url_for('deleteCategory', category_id=category.id) }}">Delete</a></br></br>
+            </div>
+
+        {% endfor %}
+</div>
+{% endblock %}
