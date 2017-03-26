@@ -16,6 +16,7 @@ class User(Base):
     email = Column(String(250), nullable=False)
     picture = Column(String(250))
 
+
 class Category(Base):
     __tablename__ = 'category'
 
@@ -31,6 +32,7 @@ class Category(Base):
             'id': self.id,
             'user_id': self.user_id
         }
+
 
 class Item(Base):
     __tablename__ = 'item'
