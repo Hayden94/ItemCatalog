@@ -10,8 +10,6 @@
                 <a href="{{ url_for('showItem', category_id=category.id, item_id=item.id) }}" class="blue">
                     <p>{{ item.name }}</p>
                 </a>
-
-                </br>
             {% endfor %}
 
             <div class='creator'>
@@ -22,7 +20,7 @@
 
 
 
-        <a href="{{ url_for('showMain') }}" class="link">
+        <a href="{{ url_for('showMain') }}" class="back">
             <p>Back</p>
         </a>
 {% endblock %}

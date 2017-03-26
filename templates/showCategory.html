@@ -2,10 +2,6 @@
 
 {% block content %}
         <div class="content">
-            <a href="{{ url_for('newItem', category_id=category.id) }}" class='link'>
-                <p>New item</p>
-            </a>
-
             <h2 class='subtitle'>{{ category.name }}</h2>
 
             <hr>
@@ -18,11 +14,26 @@
                 </br>
 
                 <div class='crud'>
-                    <a href="{{ url_for('editItem', category_id=category.id, item_id=item.id) }}">Edit</a>
-                    -
-                    <a href="{{ url_for('deleteItem', category_id=category.id, item_id=item.id) }}">Delete</a></br>
-                </div></br>
+                    <a href="{{ url_for('editItem', category_id=category.id, item_id=item.id) }}" class='crud-edit hvr-sweep-to-bottom'>
+                        Edit
+                    </a>
+
+                    <a href="{{ url_for('deleteItem', category_id=category.id, item_id=item.id) }}" class='crud-delete hvr-sweep-to-bottom'>
+                        Delete
+                    </a>
+
+                    </br>
+
+                </div>
             {% endfor %}
+
+            </br>
+
+            <a href="{{ url_for('newItem', category_id=category.id) }}" class='link hvr-sweep-to-bottom-c'>
+                New</br>item
+            </a>
+
+            </br></br>
 
             <div class='creator'>
                 <img src="{{ creator.picture }}"><p>Category created by - </br><strong>{{ creator.name }}</strong></p>
@@ -32,7 +43,7 @@
 
 
 
-        <a href="{{ url_for('showMain') }}" class="link">
+        <a href="{{ url_for('showMain') }}" class="back">
             <p>Back</p>
         </a>
 {% endblock %}

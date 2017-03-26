@@ -12,10 +12,6 @@
             </a>
         {% endfor %}
 
-    <a href="{{ url_for('newCategory') }}" class="link">
-        <p>New category</p>
-    </a>
-
     <h2 class="subtitle">Categories</h2>
 
     <hr>
@@ -28,11 +24,21 @@
             </br>
 
             <div class="crud">
-                <a href="{{ url_for('editCategory', category_id=category.id) }}">Edit</a>
-                -
-                <a href="{{ url_for('deleteCategory', category_id=category.id) }}">Delete</a></br></br>
+                <a href="{{ url_for('editCategory', category_id=category.id) }}"  class='crud-edit hvr-sweep-to-bottom'>
+                    Edit
+                </a>
+
+                <a href="{{ url_for('deleteCategory', category_id=category.id) }}" class='crud-delete hvr-sweep-to-bottom'>
+                    Delete
+                </a>
+
+                </br></br>
             </div>
 
         {% endfor %}
+
+        <a href="{{ url_for('newCategory') }}" class="link hvr-sweep-to-bottom-c">
+            New category
+        </a>
 </div>
 {% endblock %}

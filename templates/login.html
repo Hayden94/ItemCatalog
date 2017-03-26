@@ -23,19 +23,19 @@
 
         </br>
 
-        <a href="/" class="link">
+        </div>
+
+        <a href="/" class="back">
             <p>Home</p>
         </a>
-
-        </div>
 
         <script>
             function signInCallback(authResult) {
               if (authResult['code']) {
                 // Hide the sign-in button now that the user is authorized
                 $('#signInButton').attr('style', 'display: none');
-                $('.link').attr('style', 'display: none');
-                $('.login').attr('style', 'display: none');
+                $('.back').attr('style', 'display: none');
+                $('.loginbtn').attr('style', 'display: none');
                 // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
                 $.ajax({
                   type: 'POST',

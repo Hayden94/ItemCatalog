@@ -8,12 +8,13 @@
     </head>
     <body>
         {% if login_session['username'] %}
-        <a href="/logout" class="login">
-            <p>Logout</p>
+        <a href="/logout" class="loginbtn hvr-bounce-to-right">
+            Logout
         </a>
+        </div>
         {% else %}
-        <a href="/login" class="login">
-            <p>Login</p>
+        <a href="/login" class="loginbtn hvr-bounce-to-right">
+            Login
         </a>
         {% endif %}
 
