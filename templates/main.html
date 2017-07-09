@@ -3,41 +3,50 @@
         <title>Catalog App</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
+        <link rel="stylesheet" href="{{ url_for('static', filename='responsive.css') }}">
+
         <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 
         <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Oswald" rel="stylesheet">
     </head>
     <body>
-        {% if login_session['username'] %}
-        <a href="/logout" class="loginbtn hvr-bounce-to-right">
-            Logout
-        </a>
-        </div>
-        {% else %}
-        <a href="/login" class="loginbtn hvr-bounce-to-right">
-            Login
-        </a>
-        {% endif %}
+                {% if login_session['username'] %}
+                <div class="logintab">
+                    <a href="/logout" class="loginbtn">
+                        Logout
+                    </a>
+                </div>
 
-        <a href="/" class='titlelink'>
-            <h1 class="title">Catalog App</h1>
-        </a>
+                </br>
+                {% else %}
+                <div class="logintab">
+                    <a href="/login" class="loginbtn">
+                        Login
+                    </a>
+                </div>
 
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <h3 class="flash">{{ message }}</h3>
-                    {% endfor %}
+                </br>
                 {% endif %}
-            {% endwith %}
+
+                {% if login_session['username'] %}
+                    <p class="welcome">
+                        Welcome - {{ login_session['username'] }}
+                    </p>
+                {% endif %}
+
+                <a href="/" class='titlelink'>
+                    <h1 class="title">Catalog App</h1>
+                </a>
+
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <h3 class="flash">{{ message }}</h3>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
 
             </br>
-
-            {% if login_session['username'] %}
-                <p class="welcome">
-                    Welcome - {{ login_session['username'] }}
-                </p>
-            {% endif %}
 
             {% block content %}
             {% endblock %}

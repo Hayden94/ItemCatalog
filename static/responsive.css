@@ -1,0 +1,8 @@
+@media only screen and (max-width: 800px) {
+    .content {
+        width: 75%;
+    }
+    .creator img {
+        width: 75px;
+    }
+}

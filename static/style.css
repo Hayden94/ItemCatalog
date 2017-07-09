@@ -41,6 +41,11 @@ body {
     margin: 0 auto;
 }
 
+.logintab {
+  margin-top: 15px;
+  text-align: center;
+}
+
 .loginbtn {
   background-color: black;
   color: white;
@@ -94,7 +99,7 @@ form {
 
 .content {
     background-color: white;
-    width: 500px;
+    width: 35%;
     position: relative;
     display: block;
     margin: 0 auto;
@@ -111,7 +116,7 @@ form {
 .creator img {
     display: block;
     position: relative;
-    width: 35%;
+    width: 100px;
     margin: 0 auto;
     padding-top: 10px;
     border-radius: 25%;
@@ -157,6 +162,7 @@ form {
 .flash {
     text-align: center;
     color: #000033;
+    margin-bottom: -8px;
 }
 
 /* hover css */
